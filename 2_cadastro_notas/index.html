@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Notas</title>
+</head>
+
+<body>
+    <table class="table table-hover" id="tabelapai">
+        <thead class="table-dark">
+            <th>#</th>
+            <th>Nome</th>
+            <th>Nota 1</th>
+            <th>Nota 2</th>
+            <th>Nota 3</th>
+            <th>Nota 4</th>
+            <th>Média</th>
+            <th>Situação</th>
+        </thead>
+        <tbody>
+            <!-- linha 1 -->
+            <div id="aluno">
+                <tr>
+                    <th scope="linha">1</th>
+                    <td><input id="nome1" class="form-control" type="text"></td>
+                    <td><input id="nota11" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota12" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota13" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota14" class="form-control" type="number" min=0 max=100></td>
+                    <td><output id="media1"></output></td>
+                    <td><output id="situacao1"></output></td>
+                </tr>
+            </div>
+            <!-- linha 2 -->
+            <div id="aluno">
+                <tr>
+                    <th scope="linha">2</th>
+                    <td><input id="nome2" class="form-control" type="text"></td>
+                    <td><input id="nota21" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota22" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota23" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota24" class="form-control" type="number" min=0 max=100></td>
+                    <td><output id="media2"></output></td>
+                    <td><output id="situacao2"></output></td>
+                </tr>
+            </div>
+            <!-- linha 3 -->
+            <div id="aluno">
+                <tr>
+                    <th scope="linha">3</th>
+                    <td><input id="nome3" class="form-control" type="text"></td>
+                    <td><input id="nota31" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota32" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota33" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota34" class="form-control" type="number" min=0 max=100></td>
+                    <td><output id="media3"></output></td>
+                    <td><output id="situacao3"></output></td>
+                </tr>
+            </div>
+            <!-- linha 4 -->
+            <div >
+                <tr id="aluno1">
+                    <th scope="linha">4</th>
+                    <td><input id="nome4" class="form-control" type="text"></td>
+                    <td><input id="nota41" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota42" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota43" class="form-control" type="number" min=0 max=100></td>
+                    <td><input id="nota44" class="form-control" type="number" min=0 max=100></td>
+                    <td><output id="media4"></output></td>
+                    <td><output id="situacao4"></output></td>
+                </tr>
+            </div>
+        </tbody>
+
+    </table>
+
+    <button type="button" class="btn btn-secondary btn-lg" onclick="verificaMedias()">Verificar média</button>
+    <button type="button" class="btn btn-secondary btn-lg" onclick="appendRow()">Adicionar Aluno</button>
+    <button type="button" class="btn btn-secondary btn-lg" onclick="appendColumn()">Adicionar Nota</button>
+    <button type="button" class="btn btn-secondary btn-lg" onclick="">Organizar notas</button>
+    <button type="button" class="btn btn-secondary btn-lg" onclick="">Organizar nomes</button>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
