@@ -12,7 +12,7 @@
 
 <body>
     <table class="table table-hover" id="tbl" border="1">
-        <thead class="table-dark">
+        <thead class="table">
             <tr>
                 <th>Nome</th>
                 <th>Nota 1</th>
@@ -24,8 +24,12 @@
             </tr>
         </thead>
     </table>
-    <button class="btn btn-secondary btn-lg" onclick="adicionaLinha('tbl')">Adicionar</button>
-    <button class="btn btn-secondary btn-lg" onclick="appendColumn()"> Adicionar Coluna </button>
+    <button class="btn btn-secondary btn-lg" onclick="adicionaLinha('tbl')">Adicionar aluno</button>
+    <button class="btn btn-secondary btn-lg" onclick="appendColumn()"> Adicionar nota</button>
     <button class="btn btn-secondary btn-lg" onclick="calcular()"> Calcular </button>
+    <button class="btn btn-secondary btn-lg" onclick="sortTable(0)"> Organizar nomes</button>
+    <button class="btn btn-secondary btn-lg" onclick="sortNumber(0)"> Organizar médias</button>
+
+
     <script src="script.js"></script>
 </body>
