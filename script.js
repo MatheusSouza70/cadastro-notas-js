@@ -1,8 +1,81 @@
+src =
+  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"; /* link do gráfico */
+
 var qtdAlunos = 1;
 var qtdNotas = 4;
 var mediageral = 0;
-var cv = 0
-var mediar = 0
+var cv = 0;
+var mediar = 0;
+
+/* ------------ GRÁFICO ------------------- */
+
+var cont_aprov = 0;
+var cont_reprov = 0;
+var cont_recup = 0;
+var chart;
+
+function contaSituacao() {
+  cont_aprov = 0;
+  cont_reprov = 0;
+  cont_recup = 0;
+  let rows = document.getElementsByTagName("output").length;
+
+  for (let i = 0; i < rows; i += 1) {
+    let situcao = document.getElementsByTagName("output")[i].id;
+
+    if (situcao.search("situacao") >= 0) {
+      let status = document.getElementsByTagName("output")[i].innerText;
+
+      if (status == "Aprovado") {
+        cont_aprov += 1;
+      }
+      if (status == "Reprovado") {
+        cont_reprov += 1;
+      }
+      if (status == "Recuperação") {
+        cont_recup += 1;
+      }
+    }
+  }
+}
+
+function rayray() {
+  contaSituacao();
+
+  var xValues = ["Reprovado", "Aprovado", "Recuperação"];
+  var yValues = [cont_reprov, cont_aprov, cont_recup];
+  var barColors = ["red", "green", "orange"];
+
+  if (chart) {
+    console.log("Gráfico funcionando :D");
+    chart.chart.destroy();
+  }
+  chart = new Chart("myChart", {
+    type: "pie",
+    data: {
+      labels: xValues,
+      datasets: [
+        {
+          backgroundColor: barColors,
+          data: yValues,
+        },
+      ],
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Modelo gráfico da situação dos nossos alunos:",
+      },
+    },
+  });
+
+  console.log(chart);
+  chart.update();
+}
+
+/* ------------ GRÁFICO ------------------- */
+
+/* ------------ Funções ------------------- */
 
 function verificaMedias() {
   for (let y = 1; y <= qtdAlunos; y = y + 1) {
@@ -16,8 +89,8 @@ function verificaMedias() {
 
     media = resultado / qtdNotas;
 
-    mediageral = media + mediageral ;
-    cv += y
+    mediageral = media + mediageral;
+    cv += y;
 
     document.getElementById(`media${y}`).innerText = media;
 
@@ -32,8 +105,13 @@ function verificaMedias() {
       document.getElementById(`situacao${y}`).style.color = "Red";
     }
   }
-  mediar = mediageral / (cv - 1)
-  document.getElementById("mediageral1").innerText = mediar
+  mediar = mediageral / (cv - 1);
+  document.getElementById("mediageral1").innerText = mediar;
+
+  /* A verificação de médias funciona com base em pegar o elemento por ID (nota) e fazer um calculo */
+  /* e, por fim, atribuir todas as variaveis nota(1,2,3...) a uma outra váriavel (resultado) e dividir pela quantidade de notas. */
+  /* já o calculo de média geral faz com que as médias, posteriormente calculadas sejam novamente atribuidas a outra váriavel */
+  /*  */
 }
 
 function criarLinha() {
@@ -82,6 +160,9 @@ function criarLinha() {
     row.appendChild(row_data);
 
     document.getElementById("tableBody").appendChild(row);
+
+    /* o método de criar linhas é baseado em buscar no html a linha pré-definida e recriar utilizando o createElement */
+    /* Ela é delimitada variavel quantidade de alunos (qtdAlunos), que são no máximo, 10, como mostrado no começo da função. */
   }
 }
 
@@ -90,6 +171,8 @@ function deletarLinha() {
     let child = document.getElementById(`linha${qtdAlunos}`);
     document.getElementById("tableBody").removeChild(child);
     qtdAlunos -= 1;
+    /* a função de remover as linhas é simples, ela se baseia em pegar o id linha no html e usar o removechild, que apagará a linha */
+    /* diminuindo a quantidade de alunos até que a qtd seja 1, assim o html se limitará a não remover a única linha presente. */
   }
 }
 
@@ -123,6 +206,8 @@ function criarColuna() {
       console.log(media);
       console.log(row_data);
       document.getElementById(`linha${x}`).insertBefore(row_data, media);
+
+      /* a função de criar coluna */
     }
   }
 }
@@ -136,6 +221,8 @@ function deletarColuna() {
     }
 
     qtdNotas -= 1;
+
+    /* Se assemelha muito ao deletar linha, utilizando o removechild. */
   }
 }
 
@@ -162,7 +249,7 @@ for (i = 0; i < tables.length; i++) {
 }
 
 /**
- * Create a function to sort the given table.
+ * cria a função para organizar a tabela
  */
 function sortTableFunction(table) {
   return function (ev) {
@@ -174,7 +261,7 @@ function sortTableFunction(table) {
 }
 
 /**
- * Get the index of a node relative to its siblings — the first (eldest) sibling
+ * pega o index de um nodo relativo ao seu filho — o primeiro (mais velho) filho.
  * has index 0, the next index 1, etc.
  */
 function siblingIndex(node) {
@@ -188,7 +275,7 @@ function siblingIndex(node) {
 }
 
 /**
- * Sort the given table by the numbered column (0 is the first column, etc.)
+ * organiza a tabela dada pela coluna númerica (0 é a primeira coluna, etc.)
  */
 function sortRows(table, columnIndex) {
   var rows = table.querySelectorAll("tbody tr"),
@@ -242,21 +329,21 @@ function sortRows(table, columnIndex) {
 }
 
 /**
- * Compare two 'value objects' numerically
+ * compara 2 'value objects' numericamente
  */
 function sortNumberVal(a, b) {
   return sortNumber(a.value, b.value);
 }
 
 /**
- * Numeric sort comparison
+ * comparação de organização númerica
  */
 function sortNumber(a, b) {
-  return a + b;
+  return a - b;
 }
 
 /**
- * Compare two 'value objects' as dates
+ * compara 2 'value objects' como datas
  */
 function sortDateVal(a, b) {
   var dateA = Date.parse(a.value),
@@ -266,7 +353,7 @@ function sortDateVal(a, b) {
 }
 
 /**
- * Compare two 'value objects' as simple text; case-insensitive
+ * compara 2 'value objects' como texto simples; case-insensitive
  */
 function sortTextVal(a, b) {
   var textA = (a.value + "").toUpperCase();
@@ -281,4 +368,56 @@ function sortTextVal(a, b) {
   }
 
   return 0;
+}
+
+function sortTable(n) {
+  // pega o id da tabela
+  var table;
+  table = document.getElementById("tableBody");
+  var rows,
+    i,
+    x,
+    y,
+    count = 0;
+  var switching = true;
+
+  // A Ordem está para crescente.
+  var direction = "ascending";
+
+  // faz um loop até que a troca não seja mais necessária.
+  while (switching) {
+    switching = false;
+    var rows = table.rows;
+
+    //faz um loop por todas as linhas
+    for (i = 0; i < rows.length - 1; i++) {
+      var Switch = false;
+
+      // verifica se os 2 elementos precisam ser comparados
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+
+      console.log(x.childNodes[0].value.toLowerCase());
+      console.log(y.childNodes[0].value.toLowerCase());
+
+      // checa se 2 linhas precisam ser trocadas
+      if (
+        x.childNodes[0].value.toLowerCase() >
+        y.childNodes[0].value.toLowerCase()
+      ) {
+        // se sim, marca o switch como necessário e quebra o loop
+        Switch = true;
+
+        break;
+      }
+    }
+    if (Switch) {
+      // função para trocar linhas e marcar switch como completo
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+
+      // aumenta o contador conforme quantidade de linhas trocadas.
+      count++;
+    }
+  }
 }

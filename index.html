@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro de Notas</title>
+    <title>Plataforma de Cadastro de Notas</title>
+    <link rel="stylesheet" href="styles.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,8 +15,8 @@
   </head>
 
   <body>
-    <table class="table table-sm table-white sortable" id="tbl" border="1">
-      <thead id="tableHead" class="table-dark" id="tbl2">
+    <table class="table table-striped table-white sortable" id="tbl" border="1">
+      <thead id="tableHead" class="table-white" id="tbl2">
         <tr id="linha0">
           <th id="nome0">Nome</th>
           <th id="coluna01">Nota 1</th>
@@ -72,39 +73,85 @@
         </tr>
       </tbody>
     </table>
+    <details>
+      <summary class="principal">Comandos</summary>
+      <div class="botaos">
+        <button
+          type="button"
+          class="btn btn-success btn"
+          onclick="verificaMedias()"
+        >
+          Verificar média (Individual)
+        </button>
+        <button
+          type="button"
+          class="btn btn-success btn"
+          onclick="verificaMedias(0)"
+        >
+          Verificar média (Geral)
+        </button>
+      </div>
 
-    <button
-      type="button"
-      class="btn btn-white btn-lg"
-      onclick="verificaMedias()">
-      Verificar
-    </button>
+      <div class="botaos">
+        <button
+          type="button"
+          class="btn btn-outline-info btn"
+          onclick="sortTable(0)"
+        >
+          Organizar Nomes
+        </button>
+      </div>
 
-    <button type="button" class="btn btn-white btn-lg" onclick="criarLinha()">
-      + Aluno
-    </button>
+      <div class="botaos">
+        <button
+          type="button"
+          class="btn btn-outline-info btn"
+          onclick="criarLinha()"
+        >
+          + Aluno
+        </button>
 
-    <button type="button" class="btn btn-white btn-lg" onclick="deletarLinha()">
-      - Aluno
-    </button>
+        <button
+          type="button"
+          class="btn btn-outline-info btn"
+          onclick="deletarLinha()"
+        >
+          - Aluno
+        </button>
+      </div>
 
-    <button type="button" class="btn btn-white btn-lg" onclick="criarColuna()">
-      + Nota
-    </button>
+      <div class="botaos">
+        <button
+          type="button"
+          class="btn btn-outline-info btn"
+          onclick="criarColuna()"
+        >
+          + Nota
+        </button>
 
-    <button
-      type="button"
-      class="btn btn-white btn-lg"
-      onclick="deletarColuna()">
-      - Nota
-    </button>
+        <button
+          type="button"
+          class="btn btn-outline-info btn"
+          onclick="deletarColuna()"
+        >
+          - Nota
+        </button>
+      </div>
 
-    <button
-      type="button"
-      class="btn btn-white btn-lg"
-      onclick="verificaMedias(0)">
-      Verificar média geral
-    </button>
+      <div class="botaos">
+        <a href="#bottom"
+          ><button type="button" class="btn btn-success btn" onclick="rayray()">
+            Modelo Gráfico
+          </button></a
+        >
+      </div>
+    </details>
+    <!-------------- GRÁFICO --------------------->
+    <div id="bottom">
+      <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-------------- GRÁFICO --------------------->
 
     <script src="script.js"></script>
   </body>
